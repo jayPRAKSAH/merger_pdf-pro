@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{% block title %}PDF Merger Pro - Merge PDFs Easily{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <i class="fas fa-file-pdf"></i>
+                PDF Merger Pro
+            </h1>
+            <p class="hero-subtitle">
+                Combine multiple PDF files into one seamlessly. Fast, secure, and easy to use.
+            </p>
+            <a href="{{ url_for('merge_pdfs') }}" class="btn btn-custom btn-lg">
+                <i class="fas fa-compress-alt"></i>
+                Start Merging PDFs
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container">
+    <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-custom h-100">
+                <div class="card-header">
+                    <i class="fas fa-bolt fa-2x mb-2"></i>
+                    <h5 class="mb-0">Lightning Fast</h5>
+                </div>
+                <div class="card-body">
+                    <p>Merge your PDF files in seconds with our optimized processing engine. No waiting around!</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success"></i> Quick processing</li>
+                        <li><i class="fas fa-check text-success"></i> Batch operations</li>
+                        <li><i class="fas fa-check text-success"></i> Real-time progress</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-custom h-100">
+                <div class="card-header">
+                    <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                    <h5 class="mb-0">Secure & Private</h5>
+                </div>
+                <div class="card-body">
+                    <p>Your files are processed securely and deleted immediately after merging. Complete privacy guaranteed.</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success"></i> No file storage</li>
+                        <li><i class="fas fa-check text-success"></i> SSL encryption</li>
+                        <li><i class="fas fa-check text-success"></i> Auto-deletion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-custom h-100">
+                <div class="card-header">
+                    <i class="fas fa-cogs fa-2x mb-2"></i>
+                    <h5 class="mb-0">Easy to Use</h5>
+                </div>
+                <div class="card-body">
+                    <p>Simple drag-and-drop interface. No technical knowledge required. Just upload and merge!</p>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success"></i> Drag & drop</li>
+                        <li><i class="fas fa-check text-success"></i> File reordering</li>
+                        <li><i class="fas fa-check text-success"></i> Preview support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it Works Section -->
+<section class="container mt-5">
+    <div class="text-center mb-5">
+       <h2 class="display-5 fw-bold" 
+    style="background: var(--primary-gradient); 
+           -webkit-background-clip: text;  /* Chrome, Safari */
+           background-clip: text;          /* Standard */
+           -webkit-text-fill-color: transparent;">
+    How It Works
+</h2>
+
+        <p class="lead">Merge your PDFs in three simple steps</p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-lg-4 text-center">
+            <div class="step-icon mb-3">
+                <div class="d-inline-flex align-items-center justify-content-center" 
+                     style="width: 80px; height: 80px; background: var(--accent-gradient); border-radius: 50%; color: white;">
+                    <i class="fas fa-upload fa-2x"></i>
+                </div>
+            </div>
+            <h4>1. Upload Files</h4>
+            <p class="text-muted">Select or drag multiple PDF files that you want to merge together.</p>
+        </div>
+        
+        <div class="col-lg-4 text-center">
+            <div class="step-icon mb-3">
+                <div class="d-inline-flex align-items-center justify-content-center" 
+                     style="width: 80px; height: 80px; background: var(--secondary-gradient); border-radius: 50%; color: white;">
+                    <i class="fas fa-sort fa-2x"></i>
+                </div>
+            </div>
+            <h4>2. Arrange Order</h4>
+            <p class="text-muted">Drag and drop to reorder your files in the sequence you want them merged.</p>
+        </div>
+        
+        <div class="col-lg-4 text-center">
+            <div class="step-icon mb-3">
+                <div class="d-inline-flex align-items-center justify-content-center" 
+                     style="width: 80px; height: 80px; background: var(--primary-gradient); border-radius: 50%; color: white;">
+                    <i class="fas fa-download fa-2x"></i>
+                </div>
+            </div>
+            <h4>3. Download Result</h4>
+            <p class="text-muted">Click merge and download your combined PDF file instantly.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card card-custom text-center">
+                <div class="card-body p-5">
+                    <h3 class="mb-4">Ready to merge your PDFs?</h3>
+                    <p class="lead mb-4">Join thousands of users who trust PDF Merger Pro for their document needs.</p>
+                    <a href="{{ url_for('merge_pdfs') }}" class="btn btn-custom btn-lg me-3">
+                        <i class="fas fa-rocket"></i>
+                        Get Started Now
+                    </a>
+                    <a href="{{ url_for('about') }}" class="btn btn-outline-secondary btn-lg">
+                        <i class="fas fa-info-circle"></i>
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
