@@ -77,9 +77,7 @@ Please follow these guidelines for contributing to this project:
 - Test your changes thoroughly.
 - Submit a pull request describing your changes.
 
-## License Information
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact Information
 
