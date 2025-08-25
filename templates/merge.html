@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Merge PDFs - PDF Merger Pro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Page Header -->
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold" style="background: var(--primary-gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    <i class="fas fa-compress-alt"></i>
+                    Merge PDF Files
+                </h2>
+                <p class="lead">Upload multiple PDF files and combine them into a single document</p>
+            </div>
+
+            <!-- Upload Form -->
+            <div class="card card-custom">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-pdf me-2"></i>Select PDF Files
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Make sure the form has proper enctype and method -->
+                    <form method="POST" enctype="multipart/form-data" id="mergeForm">
+                        <div class="mb-4">
+                            <label for="pdf_files" class="form-label">Choose multiple PDF files to merge</label>
+                            <!-- Explicitly set multiple attribute to ensure it works -->
+                            <input class="form-control form-control-lg" type="file" id="pdf_files" name="pdf_files" multiple="multiple" accept=".pdf" required onchange="showPageInputs(this.files)">
+                            <div class="form-text">
+                                <strong>Hold Ctrl (Windows) or Command (Mac) while clicking to select multiple files</strong>
+                            </div>
+                        </div>
+                        <div id="pageInputs"></div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-lg btn-primary">
+                                <i class="fas fa-compress-alt me-2"></i>Merge Files
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Instructions Panel -->
+            <div class="card card-custom mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>How to Select Multiple Files
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <ol>
+                        <li>Click the "Choose File" button above</li>
+                        <li><strong>Hold down the Ctrl key (Windows) or Command key (Mac)</strong> while clicking on files to select multiple PDFs</li>
+                        <li>Files will be merged in the order they are selected</li>
+                        <li>Click "Open" to confirm your selection</li>
+                        <li>Click "Merge Files" to combine all selected PDFs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function showPageInputs(files) {
+    const container = document.getElementById('pageInputs');
+    container.innerHTML = '';
+    Array.from(files).forEach(file => {
+        const div = document.createElement('div');
+        div.className = "mb-2";
+        div.innerHTML = `
+            <label>Pages to merge from <strong>${file.name}</strong> (e.g. 1,3,5-7):</label>
+            <input type="text" name="pages_${file.name}" class="form-control" placeholder="e.g. 1,3,5-7">
+        `;
+        container.appendChild(div);
+    });
+}
+</script>
+{% endblock %}
