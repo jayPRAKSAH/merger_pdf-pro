@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 Flask==2.3.3
 Werkzeug==2.3.7
 PyPDF2==3.0.1
 # Optional: For more advanced PDF operations
 # PyMuPDF==1.23.3
+=======
+Flask==2.3.3
+Werkzeug==2.3.7
+PyPDF2==3.0.1
+# Optional: For more advanced PDF operations
+# PyMuPDF==1.23.3
+>>>>>>> 2c70087e9c8479acdb298c19ae6a4515446e0b37
 # reportlab==4.0.4

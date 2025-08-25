@@ -1,0 +1,387 @@
+{% extends "base.html" %}
+
+{% block title %}Merge PDFs - PDF Merger Pro{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Page Header -->
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold" style="background: var(--primary-gradient);-webkit-background-clip: text;  /* Chrome, Safari */
+background-clip: text;          /* Standard */
+color: transparent;">
+                    <i class="fas fa-compress-alt"></i>
+                    Merge PDF Files
+                </h2>
+                <p class="lead">Upload multiple PDF files and combine them into a single document</p>
+            </div>
+
+            <!-- Upload Form -->
+            <div class="card card-custom">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        Select PDF Files to Merge
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form id="mergeForm" method="POST" enctype="multipart/form-data">
+                        <!-- File Upload Area -->
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <div class="upload-icon">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                            </div>
+                            <h4 class="mb-3">Drop PDF files here</h4>
+                            <p class="text-muted mb-3">or click to browse your computer</p>
+                           <label for="files">Upload PDF files:</label>
+<input type="file" id="files" name="files" multiple title="Upload your PDF files">
+
+                            <button type="button" class="btn btn-custom" onclick="document.getElementById('pdfFiles').click()">
+                                <i class="fas fa-folder-open"></i>
+                                Choose PDF Files
+                            </button>
+                            <div class="mt-3">
+                                <small class="text-muted">
+                                    <i class="fas fa-info-circle"></i>
+                                    Supported format: PDF | Maximum file size: 16MB each | Select at least 2 files
+                                </small>
+                            </div>
+                        </div>
+
+                        <!-- Selected Files Display -->
+                        <div id="selectedFiles" class="mt-4" style="display: none;">
+                            <h6 class="mb-3">
+                                <i class="fas fa-list"></i>
+                                Selected Files (<span id="fileCount">0</span>)
+                            </h6>
+                            <p class="text-muted small mb-3">
+                                <i class="fas fa-hand-paper"></i>
+                                Drag and drop files to reorder them
+                            </p>
+                            <div id="fileList" class="border rounded p-3 bg-light">
+                                <!-- Selected files will appear here -->
+                            </div>
+                        </div>
+
+                        <!-- Merge Options -->
+                        <div class="row mt-4" id="mergeOptions" style="display: none;">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="outputName" class="form-label">
+                                        <i class="fas fa-file-signature"></i>
+                                        Output Filename
+                                    </label>
+                                    <input type="text" 
+                                           id="outputName" 
+                                           name="output_name" 
+                                           class="form-control" 
+                                           placeholder="merged_document"
+                                           value="merged_document">
+                                    <small class="text-muted">Don't include .pdf extension</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        <i class="fas fa-cogs"></i>
+                                        Merge Options
+                                    </label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="addBookmarks" name="add_bookmarks" checked>
+                                        <label class="form-check-label" for="addBookmarks">
+                                            Add bookmarks for each file
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="text-center mt-4" id="actionButtons" style="display: none;">
+                            <button type="submit" class="btn btn-custom btn-lg me-3" id="mergeButton">
+                                <i class="fas fa-compress-alt"></i>
+                                <span id="mergeButtonText">Merge PDFs</span>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg" id="clearButton">
+                                <i class="fas fa-trash-alt"></i>
+                                Clear All
+                            </button>
+                        </div>
+
+                        <!-- Progress Bar -->
+                        <div id="progressContainer" class="mt-4" style="display: none;">
+                            <div class="d-flex justify-content-between mb-2">
+                                <small class="text-muted">Merging files...</small>
+                                <small class="text-muted" id="progressText">0%</small>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                     role="progressbar" 
+                                     style="width: 0%; background: var(--accent-gradient);"
+                                     id="progressBar">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tips Card -->
+            <div class="card card-custom mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">
+                        <i class="fas fa-lightbulb text-warning"></i>
+                        Tips for Best Results
+                    </h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    Use high-quality PDF files for best output
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    Ensure files are not password protected
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    Keep file sizes under 16MB each
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    Order files before merging for best organization
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let selectedFiles = [];
+    let draggedElement = null;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileUploadArea = document.getElementById('fileUploadArea');
+        const fileInput = document.getElementById('pdfFiles');
+        const selectedFilesDiv = document.getElementById('selectedFiles');
+        const fileList = document.getElementById('fileList');
+        const fileCount = document.getElementById('fileCount');
+        const mergeOptions = document.getElementById('mergeOptions');
+        const actionButtons = document.getElementById('actionButtons');
+        const clearButton = document.getElementById('clearButton');
+        const mergeForm = document.getElementById('mergeForm');
+
+        // File upload area click
+        fileUploadArea.addEventListener('click', function() {
+            fileInput.click();
+        });
+
+        // Drag and drop functionality
+        fileUploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            fileUploadArea.classList.add('dragover');
+        });
+
+        fileUploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+        });
+
+        fileUploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            fileUploadArea.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        // File input change
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+
+        // Clear button
+        clearButton.addEventListener('click', function() {
+            selectedFiles = [];
+            fileInput.value = '';
+            updateFileDisplay();
+        });
+
+        // Handle file selection
+        function handleFiles(files) {
+            for (let file of files) {
+                if (file.type === 'application/pdf') {
+                    if (!selectedFiles.some(f => f.name === file.name)) {
+                        selectedFiles.push(file);
+                    }
+                } else {
+                    alert(`${file.name} is not a PDF file and will be ignored.`);
+                }
+            }
+            updateFileDisplay();
+        }
+
+        // Update file display
+        function updateFileDisplay() {
+            if (selectedFiles.length === 0) {
+                selectedFilesDiv.style.display = 'none';
+                mergeOptions.style.display = 'none';
+                actionButtons.style.display = 'none';
+                return;
+            }
+
+            selectedFilesDiv.style.display = 'block';
+            mergeOptions.style.display = 'block';
+            actionButtons.style.display = 'block';
+
+            fileCount.textContent = selectedFiles.length;
+            fileList.innerHTML = '';
+
+            selectedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item d-flex align-items-center justify-content-between p-3 mb-2 bg-white border rounded';
+                fileItem.draggable = true;
+                fileItem.dataset.index = index;
+                
+                fileItem.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-grip-vertical text-muted me-3" style="cursor: move;"></i>
+                        <i class="fas fa-file-pdf text-danger me-3"></i>
+                        <div>
+                            <div class="fw-semibold">${file.name}</div>
+                            <small class="text-muted">${formatFileSize(file.size)}</small>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="badge bg-primary me-2">${index + 1}</span>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Add drag and drop events
+                fileItem.addEventListener('dragstart', handleDragStart);
+                fileItem.addEventListener('dragover', handleDragOver);
+                fileItem.addEventListener('drop', handleDrop);
+                fileItem.addEventListener('dragend', handleDragEnd);
+
+                fileList.appendChild(fileItem);
+            });
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        // Drag and drop for reordering
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.style.opacity = '0.5';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (this !== draggedElement) {
+                const draggedIndex = parseInt(draggedElement.dataset.index);
+                const targetIndex = parseInt(this.dataset.index);
+                
+                // Reorder array
+                const draggedFile = selectedFiles[draggedIndex];
+                selectedFiles.splice(draggedIndex, 1);
+                selectedFiles.splice(targetIndex, 0, draggedFile);
+                
+                updateFileDisplay();
+            }
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '';
+            draggedElement = null;
+        }
+
+        // Remove file function
+        window.removeFile = function(index) {
+            selectedFiles.splice(index, 1);
+            updateFileDisplay();
+        };
+
+        // Form submission
+        mergeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (selectedFiles.length < 2) {
+                alert('Please select at least 2 PDF files to merge.');
+                return;
+            }
+
+            // Create FormData with ordered files
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('pdf_files', file);
+            });
+            formData.append('output_name', document.getElementById('outputName').value);
+            formData.append('add_bookmarks', document.getElementById('addBookmarks').checked);
+
+            // Show progress
+            showProgress();
+
+            // Submit form (placeholder for now)
+            setTimeout(() => {
+                hideProgress();
+                alert('PDF merging functionality will be implemented next!');
+            }, 2000);
+        });
+
+        // Progress functions
+        function showProgress() {
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('mergeButton').disabled = true;
+            
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                document.getElementById('progressBar').style.width = progress + '%';
+                document.getElementById('progressText').textContent = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                }
+            }, 200);
+        }
+
+        function hideProgress() {
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('mergeButton').disabled = false;
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressText').textContent = '0%';
+        }
+    });
+</script>
+{% endblock %}
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-custom h-100">
+                <div class="card-header">
+                    <i class="fas fa-cogs fa-2x mb-2"></i>
+                    <h5 class="mb-0">User               -Friendly</h5>
+                </div>                                                                                                                                      
