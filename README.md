@@ -58,7 +58,8 @@ pip install -r requirements.txt
 flask run
 ```
 
-Access the app at `http://127.0.0.1:5000`.
+Access the app at `[Run on Local Network](http://10.2.1.11:5000/)
+
 
 ## Usage Instructions
 
