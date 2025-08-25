@@ -85,6 +85,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For any inquiries or support, please contact:
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
+Your Name -jayprakashkumar0657@gmail.com
 
-Project Link: [https://github.com/jayPRAKSAH/merger_pdf-pro](https://github.com/jayPRAKSAH/merger_pdf-pro)
+Project Link: https://github.com/jayPRAKSAH/merger_pdf-pro
